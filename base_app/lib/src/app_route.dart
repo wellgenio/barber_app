@@ -7,6 +7,7 @@ class AppRoute {
   AppRoute._();
 
   static final _singleton = AppRoute._();
+  //static final _talker = Talker();
 
   factory AppRoute() {
     return _singleton;
@@ -16,10 +17,16 @@ class AppRoute {
   GoPath get public => GoPath(path: '/public', name: 'public');
 
   List<ModularRoute> get routes => [
-    ModuleRoute(
-      protected.path,
-      module: ProtectedModule(redirectTo: public, parent: protected),
+    ShellModularRoute(
+      //observers: [TalkerRouteObserver(_talker)],
+      builder: (context, state, child) => child,
+      routes: [
+        ModuleRoute(
+          protected.path,
+          module: ProtectedModule(redirectTo: public, parent: protected),
+        ),
+        ModuleRoute(public.path, module: PublicModule(parent: public)),
+      ],
     ),
-    ModuleRoute(public.path, module: PublicModule(parent: public)),
   ];
 }

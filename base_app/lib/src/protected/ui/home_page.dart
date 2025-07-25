@@ -27,6 +27,30 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text('Logout'),
             ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                ModularEvent.fire(
+                  CheckAccessEvent(
+                    userId: '42',
+                    onCheckAccess: (hasAccess) async {
+                      if (hasAccess && mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text(
+                              'Access granted',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                );
+              },
+              child: const Text('Check Access'),
+            ),
           ],
         ),
       ),

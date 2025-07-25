@@ -11,6 +11,16 @@ dependencies:
   flutter:
     sdk: flutter
   go_router_modular: ^4.0.0+7
+  dio: ^5.8.0+1
+  shared_preferences: ^2.5.3
+  talker_flutter: ^4.9.3
+  talker_dio_logger: ^4.9.3
+  retrofit: ^4.6.0
+  json_annotation: ^4.9.0
+  freezed_annotation: ^3.1.0
+  result_dart: ^2.1.1
+  result_command: ^2.1.0
+  zod_validation: ^1.0.5
 
 dev_dependencies:
   flutter_test:
