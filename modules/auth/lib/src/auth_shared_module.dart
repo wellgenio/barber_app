@@ -9,6 +9,6 @@ class AuthSharedModule extends Module {
   @override
   FutureOr<List<Bind<Object>>> binds() => [
     Bind.singleton((i) => AuthRepository()),
-    Bind.singleton((i) => AuthService(i.get<AuthRepository>())),
+    Bind.singleton<IAuthService>((i) => AuthService(i.get<AuthRepository>())),
   ];
 }

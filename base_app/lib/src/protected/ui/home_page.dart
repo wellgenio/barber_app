@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
             const Text('Welcome to the Home Page!'),
             ElevatedButton(
               onPressed: () {
-                context.read<AuthService>().logout();
+                context.read<IAuthService>().logout();
                 context.go('/');
               },
               child: const Text('Logout'),

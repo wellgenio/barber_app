@@ -1,9 +1,15 @@
 import '../data/repositories/auth_repository.dart';
 
-/// [AuthService] é uma interface de comunicação externa ao modulo de autenticação.
+/// [IAuthService] é uma interface de comunicação externa ao modulo de autenticação.
 /// Ela permite que outros módulos verifiquem o estado de autenticação e realizem ações relacionadas.
 /// Qualquer módulo que precise verificar se o usuário está autenticado ou realizar logout deve usar esta classe.
-class AuthService {
+///
+abstract class IAuthService {
+  void logout();
+  bool get isAuthenticated;
+}
+
+class AuthService implements IAuthService {
   final AuthRepository _authRepository;
 
   AuthService(this._authRepository);
