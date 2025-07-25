@@ -2,6 +2,7 @@ import 'package:auth/auth.dart';
 import 'package:shared/shared.dart';
 
 import 'ui/home_page.dart';
+import 'ui/home_viewmodel.dart';
 
 class ProtectedRoute {
   /// Parent module path
@@ -29,7 +30,10 @@ class ProtectedRoute {
   List<ModularRoute> get routes => [
     ChildRoute(
       home.path,
-      child: (context, _) => HomePage(),
+      child: (context, _) {
+        final viewmodel = HomeViewmodel(context.read<IAuthService>());
+        return HomePage(viewmodel: viewmodel);
+      },
       redirect: authGuard(_redirectTo!),
       name: home.name,
     ),

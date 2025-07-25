@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router_modular/go_router_modular.dart';
-
-import '../../auth_route.dart';
+import 'package:shared/shared.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key, required this.id});
@@ -24,9 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Text('Register with id: ${widget.id}'),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                context.goNamed(AuthRoute().loginPage.name);
-              },
+              onPressed: () => context.pop(),
               child: const Text('Back to Login'),
             ),
           ],

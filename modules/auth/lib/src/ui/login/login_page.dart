@@ -25,6 +25,15 @@ class _LoginPageState extends State<LoginPage> {
     viewModel.login.addListener(listener);
   }
 
+  @override
+  void didUpdateWidget(covariant LoginPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.viewModel != viewModel) {
+      oldWidget.viewModel.login.removeListener(listener);
+      viewModel.login.addListener(listener);
+    }
+  }
+
   void listener() {
     return switch (viewModel.login.value) {
       FailureCommand<UserModel>(:final error) =>
@@ -33,15 +42,9 @@ class _LoginPageState extends State<LoginPage> {
             content: Text(error.toString().replaceAll('Exception: ', '')),
           ),
         ),
-      SuccessCommand<UserModel>() => goToHome(),
+      SuccessCommand<UserModel>() when mounted => context.go('/'),
       _ => null,
     };
-  }
-
-  void goToHome() {
-    if (mounted) {
-      context.go('/');
-    }
   }
 
   @override
