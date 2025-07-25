@@ -1,6 +1,7 @@
 import 'package:shared/shared.dart';
 
 import 'ui/login/login_page.dart';
+import 'ui/login/login_viewmodel.dart';
 import 'ui/register/register_page.dart';
 
 class AuthRoute {
@@ -31,7 +32,9 @@ class AuthRoute {
       AuthRoute().loginPage.path,
       child: (context, state) {
         final name = state.uri.queryParameters['name'] ?? 'Guest';
-        return LoginPage(name: name);
+        final viewModel = context.read<LoginViewmodel>();
+
+        return LoginPage(name: name, viewModel: viewModel);
       },
       name: AuthRoute().loginPage.name,
     ),

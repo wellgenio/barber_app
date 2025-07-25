@@ -1,19 +1,56 @@
+import 'package:auth/src/models/response/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router_modular/go_router_modular.dart';
+import 'package:shared/shared.dart';
 
 import '../../auth_route.dart';
-import '../../data/repositories/auth_repository.dart';
+import '../../models/request/login_model.dart';
+import 'login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.name});
+  const LoginPage({super.key, required this.name, required this.viewModel});
 
   final String name;
+  final LoginViewmodel viewModel;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  LoginViewmodel get viewModel => widget.viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.login.addListener(listener);
+  }
+
+  void listener() {
+    return switch (viewModel.login.value) {
+      FailureCommand<UserModel>(:final error) =>
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.toString().replaceAll('Exception: ', '')),
+          ),
+        ),
+      SuccessCommand<UserModel>() => goToHome(),
+      _ => null,
+    };
+  }
+
+  void goToHome() {
+    if (mounted) {
+      context.go('/');
+    }
+  }
+
+  @override
+  void dispose() {
+    viewModel.login.removeListener(listener);
+    viewModel.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +63,27 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Login to continue'),
-            ElevatedButton(
-              onPressed: () {
-                context.read<AuthRepository>().login();
-                context.go('/');
+            ValueListenableBuilder(
+              valueListenable: viewModel.login,
+              builder: (context, loginState, child) {
+                final isLoading = loginState.isRunning;
+
+                return ElevatedButton(
+                  onPressed: () {
+                    if (isLoading) return;
+                    viewModel.login.execute(
+                      LoginModel(email: '', password: ''),
+                    );
+                  },
+                  child: isLoading
+                      ? SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(),
+                        )
+                      : Text('Login - ${widget.name}'),
+                );
               },
-              child: Text('Login - ${widget.name}'),
             ),
             ElevatedButton(
               onPressed: () {

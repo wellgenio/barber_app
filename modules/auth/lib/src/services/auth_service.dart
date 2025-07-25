@@ -1,3 +1,5 @@
+import 'package:shared/shared.dart';
+
 import '../data/repositories/auth_repository.dart';
 
 /// [IAuthService] é uma interface de comunicação externa ao modulo de autenticação.
@@ -5,8 +7,8 @@ import '../data/repositories/auth_repository.dart';
 /// Qualquer módulo que precise verificar se o usuário está autenticado ou realizar logout deve usar esta classe.
 ///
 abstract class IAuthService {
-  void logout();
-  bool get isAuthenticated;
+  AsyncResult<Unit> logout();
+  Future<bool> isLoggedIn();
 }
 
 class AuthService implements IAuthService {
@@ -14,7 +16,7 @@ class AuthService implements IAuthService {
 
   AuthService(this._authRepository);
 
-  void logout() => _authRepository.logout();
+  AsyncResult<Unit> logout() => _authRepository.logout();
 
-  bool get isAuthenticated => _authRepository.isAuthenticated;
+  Future<bool> isLoggedIn() => _authRepository.isLoggedIn();
 }
