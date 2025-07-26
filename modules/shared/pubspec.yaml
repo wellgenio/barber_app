@@ -2,6 +2,7 @@ name: shared
 description: "A new Flutter package project."
 version: 0.0.1
 homepage: "https://example.com/shared"
+resolution: workspace
 
 environment:
   sdk: ^3.8.1

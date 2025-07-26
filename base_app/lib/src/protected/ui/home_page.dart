@@ -1,5 +1,6 @@
 import 'package:auth/auth.dart';
 import 'package:barber_app/src/protected/ui/home_viewmodel.dart';
+import 'package:faq/faq.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
@@ -46,7 +47,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Page')),
+      appBar: AppBar(
+        title: const Text('Home Page'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            onPressed: () {
+              ModularEvent.fire(ShowFaqEvent(faqKey: FaqKey.faqCenter));
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +74,7 @@ class _HomePageState extends State<HomePage> {
                 ModularEvent.fire(
                   CheckAccessEvent(
                     userId: '42',
+                    resource: 'schedule',
                     onCheckAccess: (hasAccess) async {
                       if (hasAccess && mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(

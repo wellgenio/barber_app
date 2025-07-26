@@ -2,10 +2,11 @@ import 'package:shared/shared.dart';
 
 import '../data/repositories/auth_repository.dart';
 
-/// [IAuthService] é uma interface de comunicação externa ao modulo de autenticação.
+/// A camada `services/` é responsável pela comunicação externa ao módulo de autenticação.
 /// Ela permite que outros módulos verifiquem o estado de autenticação e realizem ações relacionadas.
 /// Qualquer módulo que precise verificar se o usuário está autenticado ou realizar logout deve usar esta classe.
 ///
+/// [IAuthService] define a interface para essas operações.
 abstract class IAuthService {
   AsyncResult<Unit> logout();
   Future<bool> isLoggedIn();

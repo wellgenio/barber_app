@@ -1,0 +1,12 @@
+name: barber_workspace
+description: Workspace para barber_app
+publish_to: none
+
+environment:
+  sdk: "^3.8.1"
+
+workspace:
+  - base_app
+  - modules/shared
+  - modules/auth
+  - modules/faq
