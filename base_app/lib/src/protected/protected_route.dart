@@ -33,7 +33,7 @@ class ProtectedRoute {
     ChildRoute(
       home.path,
       child: (context, _) {
-        final viewmodel = HomeViewmodel(context.read<IAuthService>());
+        final viewmodel = HomeViewmodel(context.read<IAuthFacade>());
         return HomePage(viewmodel: viewmodel);
       },
       redirect: authGuard(_redirectTo!),

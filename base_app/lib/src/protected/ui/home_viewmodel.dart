@@ -3,9 +3,9 @@ import 'package:shared/shared.dart';
 import 'package:auth/auth.dart';
 
 class HomeViewmodel extends ChangeNotifier {
-  final IAuthService _authService;
+  final IAuthFacade _authFacade;
 
-  HomeViewmodel(this._authService);
+  HomeViewmodel(this._authFacade);
 
-  late final logout = Command0<Unit>(_authService.logout);
+  late final logout = Command0<Unit>(_authFacade.logout);
 }

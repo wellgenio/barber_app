@@ -5,7 +5,7 @@ import 'package:shared/shared.dart';
 import 'data/api/auth_api.dart';
 import 'data/local/auth_local.dart';
 import 'data/repositories/auth_repository.dart';
-import 'services/auth_service.dart';
+import 'facades/auth_facade.dart';
 
 class AuthSharedModule extends Module {
   @override
@@ -27,7 +27,7 @@ class AuthSharedModule extends Module {
       Bind.singleton(
         (i) => AuthRepository(i.get<AuthApi>(), i.get<AuthLocal>()),
       ),
-      Bind.factory<IAuthService>((i) => AuthService(i.get<AuthRepository>())),
+      Bind.factory<IAuthFacade>((i) => AuthFacade(i.get<AuthRepository>())),
     ];
   }
 }

@@ -20,7 +20,7 @@ barber_app/
 │   │       └── src/
 │   │           ├── data/      # Camada de dados (API, local, repositórios)
 │   │           ├── models/    # Modelos de dados (request/response)
-│   │           ├── services/  # Serviços e guards (lógica e os serviços que precisam ser expostos para outros módulos)
+│   │           ├── facades/  # Facade e guards (lógica e os serviços que precisam ser expostos para outros módulos)
 │   │           └── ui/        # Telas, viewmodels e widgets
 |   |               └─ events/ # eventos de navegação e comunicação entre módulos
 │   │
@@ -52,16 +52,16 @@ barber_app/
 
 ## Padrões de Comunicação entre Módulos
 
-- **`Service Pattern`:** A camada `/services` centraliza a lógica e os serviços que precisam ser expostos para outros módulos, promovendo integração e acesso aos dados sem acoplamento direto.
+- **`Facade Pattern`:** A camada `/facades` centraliza a lógica e os serviços que precisam ser expostos para outros módulos, promovendo integração e acesso aos dados sem acoplamento direto.
 
   ### Exemplo: Integração entre Módulos
 
   #### Módulo Auth
 
-  O módulo Auth expõe a interface `IAuthService`, limitando o acesso externo apenas aos métodos necessários, como `logout` e `isLoggedIn`:
+  O módulo Auth expõe a interface `IAuthFacade`, limitando o acesso externo apenas aos métodos necessários, como `logout` e `isLoggedIn`:
 
   ```dart
-  abstract class IAuthService {
+  abstract class IAuthFacade {
     AsyncResult<Unit> logout();
     Future<bool> isLoggedIn();
   }
@@ -69,16 +69,16 @@ barber_app/
 
   #### HomeViewModel
 
-  O HomeViewModel consome o serviço `IAuthService` fornecido pelo Auth, acessando apenas os métodos permitidos:
+  O HomeViewModel consome o serviço `IAuthFacade` fornecido pelo Auth, acessando apenas os métodos permitidos:
 
   ```dart
   class HomeViewmodel extends ChangeNotifier {
-    final IAuthService _authService;
+    final IAuthFacade _authFacade;
 
-    HomeViewmodel(this._authService);
+    HomeViewmodel(this._authFacade);
 
     Future<void> logout() async {
-      await _authService.logout();
+      await _authFacade.logout();
       // lógica adicional após logout
     }
   }
@@ -168,11 +168,11 @@ barber_app/
   }
   ```
 
-  Esse padrão permite realizar navegação de telas e processamento de informações de forma totalmente desacoplada. Os módulos só precisam conhecer os `events` relevantes e, caso precisem de acesso mais direto a dados, podem utilizar os `services` apropriados.
+  Esse padrão permite realizar navegação de telas e processamento de informações de forma totalmente desacoplada. Os módulos só precisam conhecer os `events` relevantes e, caso precisem de acesso mais direto a dados, podem utilizar os `facades` apropriados.
 
 ---
 
 **Conclusão:**  
-A adoção desses padrões de comunicação — via serviços e eventos — garante baixo acoplamento, maior segurança e flexibilidade na evolução do projeto. Cada módulo pode evoluir de forma independente, facilitando a manutenção, testes e escalabilidade da aplicação.
+A adoção desses padrões de comunicação — via facade e eventos — garante baixo acoplamento, maior segurança e flexibilidade na evolução do projeto. Cada módulo pode evoluir de forma independente, facilitando a manutenção, testes e escalabilidade da aplicação.
 
 Sinta-se à vontade para adaptar a estrutura conforme as necessidades do projeto.

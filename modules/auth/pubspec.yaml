@@ -24,6 +24,7 @@ dev_dependencies:
   build_runner: ^2.5.4
   json_serializable: ^6.9.5
   freezed: ^3.1.0
+  arch_dart: ^0.0.1
 
 flutter:
   uses-material-design: true
