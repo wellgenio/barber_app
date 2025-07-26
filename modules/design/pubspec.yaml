@@ -1,8 +1,7 @@
-publish_to: none
-name: auth
+name: design
 description: "A new Flutter package project."
 version: 0.0.1
-homepage: "https://example.com/auth"
+homepage: "https://example.com/design"
 resolution: workspace
 
 environment:
@@ -13,18 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  shared:
-  design:
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  retrofit_generator: ^9.6.0
-  build_runner: ^2.5.4
-  json_serializable: ^6.9.5
-  freezed: ^3.1.0
-  arch_dart: ^0.0.1
 
 flutter:
   uses-material-design: true

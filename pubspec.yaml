@@ -10,3 +10,4 @@ workspace:
   - modules/shared
   - modules/auth
   - modules/faq
+  - modules/design

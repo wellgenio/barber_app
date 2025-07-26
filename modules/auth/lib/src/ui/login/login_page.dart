@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                context.go(
+                context.push(
                   AuthRoute()
                       .registerPage // path: /register/:id
                       .withPathParamsMap({'id': 42})

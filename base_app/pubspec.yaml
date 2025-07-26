@@ -15,6 +15,7 @@ dependencies:
   shared:
   auth:
   faq:
+  design:
 
 dev_dependencies:
   flutter_test:
