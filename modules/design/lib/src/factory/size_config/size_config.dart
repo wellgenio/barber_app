@@ -40,11 +40,3 @@ class SizeConfig {
     _typeScreen = TypeScreen.fromWidth(_screenWidth);
   }
 }
-
-extension SizeConfigExtension on BuildContext {
-  double get screenWidth => SizeConfig.screenWidth;
-  double get screenHeight => SizeConfig.screenHeight;
-
-  bool get isPortrait => SizeConfig.isPortrait;
-  TypeScreen get typeScreen => SizeConfig.typeScreen;
-}

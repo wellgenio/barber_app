@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../app_theme.dart';
-import '../factory/theme/theme_factory.dart';
+import '../factory/theme_factory.dart';
 
 class LocalTheme extends StatelessWidget {
   final WidgetBuilder builder;

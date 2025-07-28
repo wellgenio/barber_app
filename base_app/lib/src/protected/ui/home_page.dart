@@ -1,5 +1,6 @@
 import 'package:auth/auth.dart';
 import 'package:barber_app/src/protected/ui/home_viewmodel.dart';
+import 'package:design/design.dart';
 import 'package:faq/faq.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
@@ -63,7 +64,13 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('Welcome to the Home Page!'),
+            Text(
+              'Welcome to the Home Page!',
+              style: TextStyle(
+                color: context.invertedColors.primary,
+                fontSize: 24,
+              ),
+            ),
             ElevatedButton(
               onPressed: () => viewmodel.logout.execute(),
               child: const Text('Logout'),

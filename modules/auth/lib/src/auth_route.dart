@@ -33,10 +33,9 @@ class AuthRoute {
     ShellModularRoute(
       builder: (context, state, child) {
         final brightness = Theme.of(context).brightness;
-        final theme = AppTheme.instance.get(
-          ThemeType.auth,
-          brightness: brightness,
-        );
+        final themeType = ThemeType.auth;
+        final theme = AppTheme.instance.get(themeType, brightness: brightness);
+        AppTheme.instance.setCurrentType(themeType);
 
         return LocalTheme.custom(theme: theme, builder: (context) => child);
       },

@@ -33,12 +33,10 @@ class AuthModule extends EventModule {
       final authRepository = context.read<AuthRepository>();
       final hasAccess = await authRepository.checkAccess(userId: event.userId);
 
-      if (!hasAccess) {
+      if (hasAccess == false) {
         ForbiddenBottomSheet().show(context);
-        event.onCheckAccess(false);
-        return;
       }
-      event.onCheckAccess(true);
+      event.onCheckAccess(hasAccess);
     }, autoDispose: false);
   }
 

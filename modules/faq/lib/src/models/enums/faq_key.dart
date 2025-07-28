@@ -1,5 +1,6 @@
 enum FaqKey {
-  faqCenter('faq_center');
+  faqCenter('faq_center'),
+  jao('jao');
 
   final String label;
 

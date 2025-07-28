@@ -1,0 +1,55 @@
+{
+  "title": "Jão",
+  "questions": [
+    {
+      "id": "faq_center",
+      "question": "What is the FAQ Center?",
+      "answer": "The FAQ Center is a dedicated space where you can find answers to frequently asked questions."
+    },
+    {
+      "id": "faq_contact",
+      "question": "How can I contact support?",
+      "answer": "You can contact support via email at support@example.com."
+    },
+    {
+      "id": "faq_payment",
+      "question": "What payment methods are accepted?",
+      "answer": "We accept credit cards, PayPal, and bank transfers."
+    },
+    {
+      "id": "faq_shipping",
+      "question": "What are the shipping options?",
+      "answer": "We offer standard and express shipping options."
+    },
+    {
+      "id": "faq_return_policy",
+      "question": "What is the return policy?",
+      "answer": "You can return items within 30 days of purchase for a full refund."
+    },
+    {
+      "id": "faq_privacy_policy",
+      "question": "What is the privacy policy?",
+      "answer": "Your privacy is important to us. Please read our privacy policy for details."
+    },
+    {
+      "id": "faq_terms_of_service",
+      "question": "What are the terms of service?",
+      "answer": "By using our service, you agree to our terms of service. Please review them carefully."
+    },
+    {
+      "id": "faq_account_management",
+      "question": "How do I manage my account?",
+      "answer": "You can manage your account settings by visiting the account management page."
+    },
+    {
+      "id": "faq_security",
+      "question": "How is my data secured?",
+      "answer": "We use industry-standard security measures to protect your data."
+    },
+    {
+      "id": "faq_feedback",
+      "question": "How can I provide feedback?",
+      "answer": "We welcome your feedback! You can send us your thoughts via the feedback form on our website."
+    }
+  ]
+}
