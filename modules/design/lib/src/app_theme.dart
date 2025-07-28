@@ -83,6 +83,30 @@ class CustomColorPalette {
   }
 }
 
+class CustomTypography {
+  final TextStyle title;
+  final TextStyle body;
+  final TextStyle caption;
+
+  const CustomTypography({
+    required this.title,
+    required this.body,
+    required this.caption,
+  });
+
+  static CustomTypography lerp(
+    CustomTypography a,
+    CustomTypography b,
+    double t,
+  ) {
+    return CustomTypography(
+      title: TextStyle.lerp(a.title, b.title, t)!,
+      body: TextStyle.lerp(a.body, b.body, t)!,
+      caption: TextStyle.lerp(a.caption, b.caption, t)!,
+    );
+  }
+}
+
 class AppTheme {
   AppTheme._();
 
@@ -146,19 +170,46 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
 }
 
 @immutable
-class ThemeTypeExtension extends ThemeExtension<ThemeTypeExtension> {
+class AppThemeTypeExtension extends ThemeExtension<AppThemeTypeExtension> {
   final ThemeType themeType;
 
-  const ThemeTypeExtension({required this.themeType});
+  const AppThemeTypeExtension({required this.themeType});
 
   @override
-  ThemeTypeExtension copyWith({ThemeType? themeType}) {
-    return ThemeTypeExtension(themeType: themeType ?? this.themeType);
+  AppThemeTypeExtension copyWith({ThemeType? themeType}) {
+    return AppThemeTypeExtension(themeType: themeType ?? this.themeType);
   }
 
   @override
-  ThemeTypeExtension lerp(ThemeExtension<ThemeTypeExtension>? other, double t) {
-    if (other is! ThemeTypeExtension) return this;
+  AppThemeTypeExtension lerp(
+    ThemeExtension<AppThemeTypeExtension>? other,
+    double t,
+  ) {
+    if (other is! AppThemeTypeExtension) return this;
     return this;
+  }
+}
+
+@immutable
+class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
+  final CustomTypography typography;
+
+  const AppTypographyExtension({required this.typography});
+
+  @override
+  AppTypographyExtension copyWith({CustomTypography? typography}) {
+    return AppTypographyExtension(typography: typography ?? this.typography);
+  }
+
+  @override
+  AppTypographyExtension lerp(
+    ThemeExtension<AppTypographyExtension>? other,
+    double t,
+  ) {
+    if (other is! AppTypographyExtension) return this;
+
+    return AppTypographyExtension(
+      typography: CustomTypography.lerp(this.typography, other.typography, t),
+    );
   }
 }

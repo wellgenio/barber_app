@@ -4,7 +4,7 @@ import '../../app_theme.dart';
 
 final standardThemeLight = ThemeData.light().copyWith(
   extensions: [
-    ThemeTypeExtension(themeType: ThemeType.standard),
+    AppThemeTypeExtension(themeType: ThemeType.standard),
     AppThemeExtension(
       colors: CustomColorPalette(
         primary: Colors.blue[900]!,
@@ -25,12 +25,27 @@ final standardThemeLight = ThemeData.light().copyWith(
         ),
       ),
     ),
+    AppTypographyExtension(
+      typography: CustomTypography(
+        title: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.pink,
+        ),
+        body: TextStyle(fontSize: 16, color: Colors.black87),
+        caption: TextStyle(
+          fontSize: 12,
+          fontStyle: FontStyle.italic,
+          color: Colors.grey,
+        ),
+      ),
+    ),
   ],
 );
 
 final standardThemeDark = ThemeData.dark().copyWith(
   extensions: [
-    ThemeTypeExtension(themeType: ThemeType.standard),
+    AppThemeTypeExtension(themeType: ThemeType.standard),
     AppThemeExtension(
       colors: CustomColorPalette(
         primary: Colors.blue[200]!,
@@ -48,6 +63,21 @@ final standardThemeDark = ThemeData.dark().copyWith(
           disabled: Colors.grey,
           detail: Colors.white,
           soft: Colors.white,
+        ),
+      ),
+    ),
+    AppTypographyExtension(
+      typography: CustomTypography(
+        title: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.pink,
+        ),
+        body: TextStyle(fontSize: 16, color: Colors.black87),
+        caption: TextStyle(
+          fontSize: 12,
+          fontStyle: FontStyle.italic,
+          color: Colors.grey,
         ),
       ),
     ),

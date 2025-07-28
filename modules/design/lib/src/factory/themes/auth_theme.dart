@@ -4,7 +4,7 @@ import '../../app_theme.dart';
 
 final authThemeLight = ThemeData.light().copyWith(
   extensions: [
-    ThemeTypeExtension(themeType: ThemeType.auth),
+    AppThemeTypeExtension(themeType: ThemeType.auth),
     AppThemeExtension(
       colors: CustomColorPalette(
         primary: Colors.black,
@@ -25,6 +25,21 @@ final authThemeLight = ThemeData.light().copyWith(
         ),
       ),
     ),
+    AppTypographyExtension(
+      typography: CustomTypography(
+        title: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.pink,
+        ),
+        body: TextStyle(fontSize: 16, color: Colors.black87),
+        caption: TextStyle(
+          fontSize: 12,
+          fontStyle: FontStyle.italic,
+          color: Colors.grey,
+        ),
+      ),
+    ),
   ],
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -37,7 +52,7 @@ final authThemeLight = ThemeData.light().copyWith(
 
 final authThemeDark = ThemeData.dark().copyWith(
   extensions: [
-    ThemeTypeExtension(themeType: ThemeType.auth),
+    AppThemeTypeExtension(themeType: ThemeType.auth),
     AppThemeExtension(
       colors: CustomColorPalette(
         primary: Colors.white,
@@ -55,6 +70,21 @@ final authThemeDark = ThemeData.dark().copyWith(
           disabled: Colors.grey,
           detail: Colors.white,
           soft: Colors.white,
+        ),
+      ),
+    ),
+    AppTypographyExtension(
+      typography: CustomTypography(
+        title: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.pink,
+        ),
+        body: TextStyle(fontSize: 16, color: Colors.black87),
+        caption: TextStyle(
+          fontSize: 12,
+          fontStyle: FontStyle.italic,
+          color: Colors.grey,
         ),
       ),
     ),

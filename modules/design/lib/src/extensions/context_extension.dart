@@ -13,7 +13,7 @@ extension BuildContextThemeExtension on BuildContext {
 
     final currentThemeType = Theme.of(
       this,
-    ).extension<ThemeTypeExtension>()!.themeType;
+    ).extension<AppThemeTypeExtension>()!.themeType;
 
     final themeData = AppTheme.instance.get(
       currentThemeType,
@@ -22,6 +22,9 @@ extension BuildContextThemeExtension on BuildContext {
 
     return themeData.extension<AppThemeExtension>()!.colors;
   }
+
+  CustomTypography get text =>
+      Theme.of(this).extension<AppTypographyExtension>()!.typography;
 }
 
 extension SizeConfigExtension on BuildContext {

@@ -1,4 +1,5 @@
 import 'package:auth/src/models/response/user_model.dart';
+import 'package:design/design.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
@@ -65,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Login to continue'),
+            Text('Login to continue', style: context.text.body),
             ValueListenableBuilder(
               valueListenable: viewModel.login,
               builder: (context, loginState, child) {
