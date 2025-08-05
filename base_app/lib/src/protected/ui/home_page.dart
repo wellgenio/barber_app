@@ -4,6 +4,7 @@ import 'package:faq/faq.dart';
 import 'package:flutter/material.dart';
 import 'package:products/products.dart';
 import 'package:shared/shared.dart';
+import 'package:shopping_cart/shopping_cart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,6 +19,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline),
@@ -26,6 +37,24 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Center(
+                child: Text(
+                  'Shopping Cart',
+                  style: TextStyle(
+                    color: context.invertedColors.primary,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            ShoppingCartListWidget(),
+          ],
+        ),
       ),
       body: Center(
         child: Column(
@@ -77,7 +106,29 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            Flexible(flex: 8, child: ProductListWidget()),
+            Flexible(
+              flex: 8,
+              child: ProductListWidget(
+                onProductAdded: (jsonProduct) {
+                  ModularEvent.fire(
+                    AddProductToCartEvent(
+                      jsonProduct,
+                      onSuccess: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text(
+                              'Product added to cart',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

@@ -12,3 +12,4 @@ workspace:
   - modules/faq
   - modules/design
   - modules/products
+  - modules/shopping_cart
