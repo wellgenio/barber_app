@@ -11,3 +11,4 @@ workspace:
   - modules/auth
   - modules/faq
   - modules/design
+  - modules/products

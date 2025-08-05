@@ -16,6 +16,7 @@ dependencies:
   auth:
   faq:
   design:
+  products:
 
 dev_dependencies:
   flutter_test:

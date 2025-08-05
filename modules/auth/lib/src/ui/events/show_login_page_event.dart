@@ -5,7 +5,7 @@
 ///
 /// Exemplo de uso:
 /// ```dart
-/// context.read<AuthBloc>().add(const ShowLoginPageEvent());
+///  ModularEvent.fire(const ShowLoginPageEvent());
 /// ```
 ///
 final class ShowLoginPageEvent {

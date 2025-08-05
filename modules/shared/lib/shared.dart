@@ -12,3 +12,4 @@ export 'src/utils/go_path.dart';
 export 'src/factories/factories.dart' show dioFactory, localStorageFactory;
 export 'src/adapters/local_storage.dart' show ILocalStorage;
 export 'src/mixins/future_mixin.dart';
+export 'src/utils/module_widget.dart';
