@@ -1,0 +1,7 @@
+{
+  "homePage": {
+    "welcomeMessage": "Welcome to our application!",
+    "loginButton": "Log In",
+    "signupButton": "Sign Up"
+  }
+}

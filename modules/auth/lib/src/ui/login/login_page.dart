@@ -6,6 +6,7 @@ import 'package:shared/shared.dart';
 import '../../auth_route.dart';
 import '../../models/request/login_model.dart';
 import 'login_viewmodel.dart';
+import '../../../i18n/translations.g.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.name, required this.viewModel});
@@ -57,50 +58,57 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login Page'),
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Login to continue', style: context.text.body),
-            ValueListenableBuilder(
-              valueListenable: viewModel.login,
-              builder: (context, loginState, child) {
-                final isLoading = loginState.isRunning;
+    return Material(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(t.loginPage.title),
+          automaticallyImplyLeading: false,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                t.loginPage.description,
+                style: context.text.body.copyWith(
+                  color: context.colors.primary,
+                ),
+              ),
+              ValueListenableBuilder(
+                valueListenable: viewModel.login,
+                builder: (context, loginState, child) {
+                  final isLoading = loginState.isRunning;
 
-                return ElevatedButton(
-                  onPressed: () {
-                    if (isLoading) return;
-                    viewModel.login.execute(
-                      LoginModel(email: '', password: ''),
-                    );
-                  },
-                  child: isLoading
-                      ? SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(),
-                        )
-                      : Text('Login - ${widget.name}'),
-                );
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.push(
-                  AuthRoute()
-                      .registerPage // path: /register/:id
-                      .withPathParamsMap({'id': 42})
-                      .completePath,
-                );
-              },
-              child: const Text('Register'),
-            ),
-          ],
+                  return ElevatedButton(
+                    onPressed: () {
+                      if (isLoading) return;
+                      viewModel.login.execute(
+                        LoginModel(email: '', password: ''),
+                      );
+                    },
+                    child: isLoading
+                        ? SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(),
+                          )
+                        : Text('${t.loginPage.loginButton} - ${widget.name}'),
+                  );
+                },
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context.push(
+                    AuthRoute
+                        .registerPage // path: /register/:id
+                        .withPathParamsMap({'id': 42})
+                        .completePath,
+                  );
+                },
+                child: Text(t.loginPage.registerButton),
+              ),
+            ],
+          ),
         ),
       ),
     );

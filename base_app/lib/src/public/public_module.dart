@@ -8,5 +8,5 @@ class PublicModule extends Module {
   PublicModule({this.parent});
 
   @override
-  List<ModularRoute> get routes => PublicRoute(root: parent).routes;
+  List<ModularRoute> get routes => PublicRoute.init(parent).routes;
 }

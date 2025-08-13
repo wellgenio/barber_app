@@ -18,7 +18,7 @@ class FaqModule extends EventModule {
   @override
   void listen() {
     on<ShowFaqEvent>((event, context) {
-      context.push(
+      context?.push(
         FaqRoute().frequentQuestion.withPathParamsMap({
           'key': event.faqKey.label,
         }).completePath,

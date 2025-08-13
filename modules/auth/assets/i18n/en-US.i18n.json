@@ -1,0 +1,10 @@
+{
+  "loginPage": {
+    "title": "Login",
+    "description": "Please enter your credentials to log in.",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "loginButton": "Log In",
+    "registerButton": "Register"
+  }
+}

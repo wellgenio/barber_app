@@ -21,9 +21,11 @@ class ShoppingCartModule extends EventModule {
   @override
   void listen() {
     on<AddProductToCartEvent>((event, context) async {
-      final repo = context.read<ShoppingCartRepository>();
-      repo.addProduct(ProductModel.fromJson(event.jsonProduct));
-      event.onSuccess();
+      if (context != null) {
+        final repo = context.read<ShoppingCartRepository>();
+        repo.addProduct(ProductModel.fromJson(event.jsonProduct));
+        event.onSuccess();
+      }
     });
   }
 }

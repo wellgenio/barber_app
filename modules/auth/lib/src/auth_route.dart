@@ -14,7 +14,7 @@ class AuthRoute {
 
   static final _singleton = AuthRoute._();
 
-  factory AuthRoute([GoPath? root]) {
+  factory AuthRoute.init([GoPath? root]) {
     if (root != null) {
       _singleton.root = root;
     }
@@ -23,10 +23,11 @@ class AuthRoute {
   }
 
   /// Paths
-  GoPath get loginPage => GoPath(path: '/login', name: 'login', root: root);
+  static GoPath get loginPage =>
+      GoPath(path: '/login', name: 'login', root: _singleton.root);
 
-  GoPath get registerPage =>
-      GoPath(path: '/register/:id', name: 'register', root: root);
+  static GoPath get registerPage =>
+      GoPath(path: '/register/:id', name: 'register', root: _singleton.root);
 
   /// Routes
   List<ModularRoute> get routes => [
@@ -41,22 +42,22 @@ class AuthRoute {
       },
       routes: [
         ChildRoute(
-          AuthRoute().loginPage.path,
+          loginPage.path,
           child: (context, state) {
             final name = state.uri.queryParameters['name'] ?? 'Guest';
             final viewModel = context.read<LoginViewmodel>();
 
             return LoginPage(name: name, viewModel: viewModel);
           },
-          name: AuthRoute().loginPage.name,
+          name: loginPage.name,
         ),
         ChildRoute(
-          AuthRoute().registerPage.path,
+          registerPage.path,
           child: (context, state) {
             final id = int.parse(state.pathParameters['id'] ?? '0');
             return RegisterPage(id: id);
           },
-          name: AuthRoute().registerPage.name,
+          name: registerPage.name,
         ),
       ],
     ),

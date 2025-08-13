@@ -11,7 +11,7 @@ class PublicRoute {
 
   static final _singleton = PublicRoute._();
 
-  factory PublicRoute({GoPath? root}) {
+  factory PublicRoute.init([GoPath? root]) {
     if (root != null) {
       _singleton.root = root;
     }
@@ -19,8 +19,10 @@ class PublicRoute {
     return _singleton;
   }
 
-  GoPath get splash => GoPath(path: '/', name: 'splash', root: root);
-  GoPath get authModule => GoPath(path: '/auth', name: 'auth', root: root);
+  static GoPath get splash =>
+      GoPath(path: '/', name: 'splash', root: _singleton.root);
+  static GoPath get authModule =>
+      GoPath(path: '/auth', name: 'auth', root: _singleton.root);
 
   List<ModularRoute> get routes => [
     ChildRoute(

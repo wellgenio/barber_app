@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:shared/shared.dart';
 
+import '../i18n/translations.g.dart';
 import 'auth_route.dart';
 import 'auth_shared_module.dart';
 import 'data/repositories/auth_repository.dart';
@@ -19,25 +20,41 @@ class AuthModule extends EventModule {
   }
 
   @override
+  void initState(Injector i) {
+    super.initState(i);
+
+    /// Langauage settings initialization
+    final rawLocale = GlobalLangManager.instance.rawLocale;
+    LocaleSettings.setLocaleRaw(rawLocale);
+    GlobalLangManager.instance.rawLocaleStream.listen((locale) {
+      LocaleSettings.setLocaleRaw(locale);
+    });
+  }
+
+  @override
   void listen() {
     on<ShowLoginPageEvent>((event, context) {
-      context.push(
-        AuthRoute()
+      context?.push(
+        AuthRoute
             .loginPage // path: /login?name=Jhoe+Doe
             .withQueryParamsMap({'name': 'Jhoe Doe'})
             .completePath,
       );
-    }, autoDispose: false);
+    });
 
     on<CheckAccessEvent>((event, context) async {
-      final authRepository = context.read<AuthRepository>();
-      final hasAccess = await authRepository.checkAccess(userId: event.userId);
+      if (context != null) {
+        final authRepository = context.read<AuthRepository>();
+        final hasAccess = await authRepository.checkAccess(
+          userId: event.userId,
+        );
 
-      if (hasAccess == false) {
-        ForbiddenBottomSheet().show(context);
+        if (hasAccess == false) {
+          ForbiddenBottomSheet().show(context);
+        }
+        event.onCheckAccess(hasAccess);
       }
-      event.onCheckAccess(hasAccess);
-    }, autoDispose: false);
+    });
   }
 
   @override
@@ -50,5 +67,5 @@ class AuthModule extends EventModule {
   ];
 
   @override
-  List<ModularRoute> get routes => AuthRoute(parent).routes;
+  List<ModularRoute> get routes => AuthRoute.init(parent).routes;
 }

@@ -75,7 +75,7 @@ class _ModularProviderState extends State<ModularProvider> {
 
   _loadBinds() async {
     try {
-      await RouteManager.instance.registerBindsModule(widget.module);
+      await InjectionManager.instance.registerBindsModule(widget.module);
 
       setState(() {
         _pending = false;
@@ -96,7 +96,7 @@ class _ModularProviderState extends State<ModularProvider> {
   @override
   void dispose() {
     super.dispose();
-    RouteManager.instance.unregisterModule(widget.module);
+    InjectionManager.instance.unregisterModule(widget.module);
     widget.module.dispose();
   }
 }

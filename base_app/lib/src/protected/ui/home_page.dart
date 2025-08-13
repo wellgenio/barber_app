@@ -6,6 +6,8 @@ import 'package:products/products.dart';
 import 'package:shared/shared.dart';
 import 'package:shopping_cart/shopping_cart.dart';
 
+import '../../../i18n/translations.g.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -14,11 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final lang = ValueNotifier(GlobalLangManager.instance.locale);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: Text(t.homePage.welcomeMessage),
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -30,6 +34,20 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         actions: [
+          ValueListenableBuilder(
+            valueListenable: lang,
+            builder: (context, value, child) {
+              return Switch(
+                value: value == AppLocale.ptBr.flutterLocale,
+                onChanged: (newValue) {
+                  final locale = newValue ? AppLocale.ptBr : AppLocale.enUs;
+                  lang.value = locale.flutterLocale;
+
+                  LocaleSettings.setLocale(locale);
+                },
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.help_outline),
             onPressed: () {
